@@ -77,12 +77,27 @@ namespace Alura.LeilaoOnLine.Tests
         }
 
         [Fact]
+        private void LeilaoSemLances()
+        {
+            //Arrange - cenário do teste
+            var leilao = new Leilao("Van Gogh");
+
+            // Act - método sob teste
+            leilao.TerminaPregao();
+
+            // Assert
+            var valorEsperado = 0;
+            var valorObtido = leilao.Ganhador.Valor;
+
+            Assert.Equal(valorEsperado, valorObtido);
+        }
+
+        [Fact]
         private void LeilaoComApenasUmLance()
         {
             //Arrange - cenário do teste
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
-            var maria = new Interessada("Maria", leilao);
 
             leilao.RecebeLance(fulano, 800);
 
