@@ -5,6 +5,22 @@ namespace Alura.LeilaoOnLine.ConsoleApp
 {
     class Program
     {
+        private static void Verifica(double esperado, double obtido)
+        {
+            var cor = Console.ForegroundColor;
+            if (esperado == obtido)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("TESTE OK");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"TESTE FALHOU Esperado: {esperado}, obtido: {obtido}.");
+            }
+            Console.ForegroundColor = cor;
+        }
+
         private static void LeilaoComVariosLances()
         {
             //Arrange - cenário do teste
@@ -24,10 +40,7 @@ namespace Alura.LeilaoOnLine.ConsoleApp
             var valorEsperado = 1000;
             var valorObtido = leilao.Ganhador.Valor;
 
-            if (valorEsperado == valorObtido)
-                Console.WriteLine("TESTE OK");
-            else
-                Console.WriteLine("TESTE FALHOU");
+            Verifica(valorEsperado, valorObtido);
         }
 
         private static void LeilaoComApenasUmLance()
@@ -46,10 +59,7 @@ namespace Alura.LeilaoOnLine.ConsoleApp
             var valorEsperado = 1000;
             var valorObtido = leilao.Ganhador.Valor;
 
-            if (valorEsperado == valorObtido)
-                Console.WriteLine("TESTE OK");
-            else
-                Console.WriteLine("TESTE FALHOU");
+            Verifica(valorEsperado, valorObtido);
         }
 
             static void Main()
