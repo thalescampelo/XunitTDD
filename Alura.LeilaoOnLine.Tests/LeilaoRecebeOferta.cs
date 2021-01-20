@@ -9,6 +9,24 @@ namespace Alura.LeilaoOnLine.Tests
 {
     public class LeilaoRecebeOferta
     {
+        [Fact]
+        private void NaoAceitaProximoLanceDadoMEsmoClienteRealizouUltimoLance()
+        {
+            //Arrange - cenário do teste
+            var leilao = new Leilao("Van Gogh");
+            var fulano = new Interessada("Fulano", leilao);
+            leilao.IniciaPregao();
+            leilao.RecebeLance(fulano, 800);
+
+            // Act - método sob teste
+            leilao.RecebeLance(fulano, 1000);
+
+            // Assert
+            var quantidadeEsperada = 1;
+            var quantidadeObtidade = leilao.Lances.Count();
+            Assert.Equal(quantidadeEsperada, quantidadeObtidade);
+        }
+
         [Theory]
         [InlineData(4, new double[] { 1000, 1200, 1440, 15000 })]
         [InlineData(2, new double[] { 800, 900})]
@@ -17,11 +35,20 @@ namespace Alura.LeilaoOnLine.Tests
             //Arrange - cenário do teste
             var leilao = new Leilao("Van Gogh");
             var fulano = new Interessada("Fulano", leilao);
+            var maria = new Interessada("Maria", leilao);
 
             leilao.IniciaPregao();
-            foreach (var valor in ofertas)
+            for (int i = 0; i < ofertas.Length; i++)
             {
-                leilao.RecebeLance(fulano, valor);
+                var valor = ofertas[i];
+                if ((i%2) == 0)
+                {
+                    leilao.RecebeLance(fulano, valor);
+                }
+                else
+                {
+                    leilao.RecebeLance(maria, valor);
+                }
             }
             leilao.TerminaPregao();
 
