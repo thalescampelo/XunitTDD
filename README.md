@@ -64,3 +64,4 @@ Referencia https://www.martinfowler.com/bliki/TestCoverage.html
 
 TDD também ajuda no design da codificação do sistema e as interfaces das classes.
 
+Inicio do conseito SOLID para design de classes.
